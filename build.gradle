@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'pickle - Java object serialization library', 'Implementation-Version': 1.0
+    }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile 'org.tinylog:tinylog:1.1'
+    compile 'org.tinylog:log4j-facade:1.1'
+    compile 'org.tinylog:slf4j-binding:1.1'
+    compile 'org.projectlombok:lombok:1.16.8'
+    compile 'commons-codec:commons-codec:1.8'
+    testCompile 'junit:junit:4.+'
+}
