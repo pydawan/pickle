@@ -40,7 +40,8 @@ public class PickleTest {
         System.out.println(message);
         picklingPeople.forEach(System.out::println);
         picklingPeople.forEach(ps -> {
-            unpicklingPeople.add((Person) Pickle.loads(ps));
+            unpicklingPeople.add(Pickle.loads(ps, Person.class)); 
+            // or unpicklingPeople.add((Person) Pickle.loads(ps));
         });
         message = "\n---- Strings na base 64 decodificadas para objetos da classe Pessoa ----\n";
         System.out.println(message);
@@ -50,3 +51,4 @@ public class PickleTest {
     }
     
 }
+
