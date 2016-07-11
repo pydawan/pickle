@@ -21,16 +21,6 @@ import org.apache.commons.codec.binary.Base64;
 public abstract class Pickle {
     
     /**
-     * Method that serializes the data in a file.
-     * 
-     * @param o the object to be serialized.
-     * @param f the file where the serialization will occur.
-     */
-    public static void dump(Object o, File f) {
-        dump(o, f, false);
-    }
-    
-    /**
      * Method that serializes the data in a file with append writting mode or not.
      * 
      * @param o the object to be serialized.
@@ -53,6 +43,16 @@ public abstract class Pickle {
                 e.printStackTrace();
             }
         }
+    }
+    
+    /**
+     * Method that serializes the data in a file.
+     * 
+     * @param o the object to be serialized.
+     * @param f the file where the serialization will occur.
+     */
+    public static void dump(Object o, File f) {
+        dump(o, f, false);
     }
     
     /**
@@ -85,41 +85,49 @@ public abstract class Pickle {
     }
     
     /**
-     * Method that deserialize a object.
+     * Method that deserializes an object in a specific way.
+     * This method converts an object to a specific class type.
      * 
-     * @param f file where the object is serialized.
+     * @param f file where serialized object was stored.
+     * @param c class of the object that will be returned.
      * @return the deserialized object.
      */
-    public static Object load(File f) {
+    public static <T> T load(File f, Class<T> c) {
         Object o = null;
-        if (f != null) {
-            try {
-                // Creating an input stream of data from a file.
-                FileInputStream fis = new FileInputStream(f);
-                // Creating an object that read data from a file.
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                // Reading the data.
-                o = ois.readObject();
-                // Closing the reader.
-                ois.close();
-                // Closing the input stream.
-                fis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+        if (f != null && c != null) {
+            if (f.exists() && f.isFile()) {
+                try {
+                    // Creating an input stream of data from a file.
+                    FileInputStream fis = new FileInputStream(f);
+                    // Creating an object that read data from a file.
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+                    // Reading the data.
+                    o = ois.readObject();
+                    // Closing the reader.
+                    ois.close();
+                    // Closing the input stream.
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        return o;
+        return c.cast(o);
     }
     
     /**
-     * Method that deserializes a object from a string.
+     * Method that deserialize an object in generic way.
      * 
-     * @param s string that represents the serialized object.
+     * @param f file where serialized object was stored.
      * @return the deserialized object.
      */
-    public static Object loads(String s) {
+    public static Object load(File f) {
+        return load(f, Object.class);
+    }
+    
+    public static <T> T loads(String s, Class<T> c) {
         Object o = null;
         ByteArrayInputStream bais;
         try {
@@ -140,6 +148,17 @@ public abstract class Pickle {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return o;
+        return c.cast(o);
     }
+    
+    /**
+     * Method that deserializes a object from a string.
+     * 
+     * @param s string that represents the serialized object.
+     * @return the deserialized object.
+     */
+    public static Object loads(String s) {
+        return loads(s, Object.class);
+    }
+    
 }
