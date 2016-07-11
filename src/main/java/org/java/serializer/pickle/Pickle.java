@@ -90,6 +90,7 @@ public abstract class Pickle {
      * 
      * @param f file where serialized object was stored.
      * @param c class of the object that will be returned.
+     * @param <T> generic type
      * @return the deserialized object.
      */
     public static <T> T load(File f, Class<T> c) {
