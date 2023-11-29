@@ -12,9 +12,9 @@ import org.junit.Test;
 
 public class PickleTest {
     
-    private static List<Person> people = new ArrayList<>();
-    private static List<String> picklingPeople = new ArrayList<>();
-    private static List<Person> unpicklingPeople = new ArrayList<>();
+    private final static List<Person> people = new ArrayList<>();
+    private final static List<String> picklingPeople = new ArrayList<>();
+    private final static List<Person> unpicklingPeople = new ArrayList<>();
     
     @BeforeClass
     public static void setUp() throws Exception {
