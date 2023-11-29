@@ -8,17 +8,26 @@ version = '1.0'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'pickle - Java object serialization library', 'Implementation-Version': 1.0
+        attributes \
+            'Implementation-Title': 'pickle - Java object serialization library',
+            'Implementation-Version': 1.0
     }
 }
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    compile 'org.tinylog:tinylog:1.1'
-    compile 'org.tinylog:log4j-facade:1.1'
-    compile 'org.tinylog:slf4j-binding:1.1'
-    compile 'org.projectlombok:lombok:1.16.8'
-    compile 'commons-codec:commons-codec:1.8'
-    testCompile 'junit:junit:4.+'
+    implementation 'org.tinylog:tinylog-api:2.6.2'
+    implementation 'org.tinylog:tinylog-impl:2.6.2'
+    implementation 'commons-codec:commons-codec:1.16.0'
+
+    testImplementation 'junit:junit:4.13.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
