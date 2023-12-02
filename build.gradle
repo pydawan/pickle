@@ -22,6 +22,7 @@ dependencies {
     implementation 'org.tinylog:tinylog-api:2.6.2'
     implementation 'org.tinylog:tinylog-impl:2.6.2'
     implementation 'commons-codec:commons-codec:1.16.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
 
     testImplementation 'junit:junit:4.13.2'
 
